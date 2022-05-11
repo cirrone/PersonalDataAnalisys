@@ -10,43 +10,12 @@ addpath("FunctionsTOF/");
 % c1 : diamond
 % c2: IC
 %
-[dataManual_Diamond_00, opts_dataManual_Diamond_00] = ...
-    readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00000.txt');
-
-[dataManual_IC_00, opts_dataManual_IC_00]  = ...
-    readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00000.txt');
-
-
-dataManual_Diamond_01 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00001.txt');
-dataManual_IC_01 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00001.txt');
-
-dataManual_Diamond_02 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00002.txt');
-dataManual_IC_02 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00002.txt');
-
-dataManual_Diamond_03 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00003.txt');
-dataManual_IC_03 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00003.txt');
-
-dataManual_Diamond_04 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00004.txt');
-dataManual_IC_04 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00004.txt');
-
-dataManual_Diamond_05 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00005.txt');
-dataManual_IC_05 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00005.txt');
-
-dataManual_Diamond_06 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00006.txt');
-dataManual_IC_06 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00006.txt');
-
-dataManual_Diamond_07 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00007.txt');
-dataManual_IC_07 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00007.txt');
-
-dataManual_Diamond_08 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00008.txt');
-dataManual_IC_08 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00008.txt');
-
-dataManual_Diamond_09 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00004.txt');
-dataManual_IC_09 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00004.txt');
+[dataAutomatic, opts_dataAutomatic] = ...
+    readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Automatic/Data-ScopeLC_8404M--2022-05-09--15-45-39.165_D2_5139.00.txt');
 
 
 %% Plot
-createfigure(dataManual_IC_00.Time, dataManual_IC_00.Ampl)
+createfigure(dataAutomatic.Time, dataAutomatic.Ampl3)
 legend('IC')
 
 
@@ -55,7 +24,7 @@ legend('IC')
 %% Energy calculation from the time position
 %
 [TimeInput, AmplitudeInput] = ginput;
-%%
+
 
 mp = 1*((938.27)/(9*10^16));
 c = 3*10^8;
@@ -68,7 +37,7 @@ Ep = (gamma_p -1)*mp*c^2;
 
 % relativistic energy in keV
 %
-Ep = Ep*Ep*E3;
+Ep = Ep*1E3;
 
 
 % 
