@@ -1,4 +1,4 @@
-function [tabularData] = readLECROYWaveRunnerkR(filename)
+function [tabularData, opts] = readLECROYWaveRunnerkR(filename)
 %% Import data from text file
 % Script for importing data from the following text file:
 %
@@ -23,8 +23,7 @@ opts.ConsecutiveDelimitersRule = "join";
 opts.LeadingDelimitersRule = "ignore";
 
 % Import the data
-
 tabularData = readtable(filename, opts);
 
 %% Clear temporary variables
-clear opts
+%clear opts

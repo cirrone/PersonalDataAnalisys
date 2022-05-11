@@ -1,44 +1,83 @@
-
+%%
+clear all
+close all
 
 %% Add folders
 addpath("FunctionsTOF/");
 
 %% To be used for data coming from the LECROY WaveRunner kR scope
 %
-%data = readLECROYWaveRunnerkR('/home/pablo.cirrone/WaterTarget/2022-05-09/Manual/C1--XX--00000.txt');
-data = readLECROYWaveRunnerkR('C1--XX--00000.txt');
+% c1 : diamond
+% c2: IC
+%
+[dataManual_Diamond_00, opts_dataManual_Diamond_00] = ...
+    readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00000.txt');
 
-%% Clear temporary variables
-clear opts
+[dataManual_IC_00, opts_dataManual_IC_00]  = ...
+    readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00000.txt');
 
-% 
+
+dataManual_Diamond_01 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00001.txt');
+dataManual_IC_01 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00001.txt');
+
+dataManual_Diamond_02 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00002.txt');
+dataManual_IC_02 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00002.txt');
+
+dataManual_Diamond_03 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00003.txt');
+dataManual_IC_03 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00003.txt');
+
+dataManual_Diamond_04 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00004.txt');
+dataManual_IC_04 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00004.txt');
+
+dataManual_Diamond_05 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00005.txt');
+dataManual_IC_05 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00005.txt');
+
+dataManual_Diamond_06 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00006.txt');
+dataManual_IC_06 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00006.txt');
+
+dataManual_Diamond_07 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00007.txt');
+dataManual_IC_07 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00007.txt');
+
+dataManual_Diamond_08 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00008.txt');
+dataManual_IC_08 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00008.txt');
+
+dataManual_Diamond_09 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C1--XX--00004.txt');
+dataManual_IC_09 = readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Manual/C2--XX--00004.txt');
+
+
+%% Plot
+createfigure(dataManual_IC_00.Time, dataManual_IC_00.Ampl)
+legend('IC')
+
+
+%createfigure(dataManual_Diamond_00.Time, dataManual_Diamond_00.Ampl)
+%legend('Diamond')
+%% Energy calculation from the time position
+%
+[TimeInput, AmplitudeInput] = ginput;
+%%
+
+mp = 1*((938.27)/(9*10^16));
+c = 3*10^8;
+
+beta_p = (0.2/(TimeInput))/c;
+gamma_p = 1/(sqrt(1-beta_p.^2));
+
+% RELATIVISTIC energy in MeV
+Ep = (gamma_p -1)*mp*c^2;
+
+% relativistic energy in keV
+%
+Ep = Ep*Ep*E3;
+
+
 % 
 % %% Read signals from oscilloscope 1
 %  
 % TOF_Scope1=textread('/home/pablo.cirrone/WaterTarget/2022-05-09/Manual/C1--XX--00000.txt', '', 'delimiter', ',', ... 
 %                 'headerlines',0,'emptyvalue', NaN);
 %             
-%    Ch1_1(:,1)=TOF_Scope1(:,1);
-%    Ch1_1(:,2)=TOF_Scope1(:,2);
-%    
-%    Ch2_1(:,1)=TOF_Scope1(:,1);
-%    Ch2_1(:,2)=TOF_Scope1(:,3);
-%    
-%    Ch3_1(:,1)=TOF_Scope1(:,1);
-%    Ch3_1(:,2)=TOF_Scope1(:,4);
-%    
-%    Ch4_1(:,1)=TOF_Scope1(:,1);
-%    Ch4_1(:,2)=TOF_Scope1(:,5);
-%   
-%   %% This will plot the channels all together
-% % figure;
-% % plot(Ch1_1(:,1)*10^9,Ch1_1(:,2)*2,Ch2_1(:,1)*10^9,Ch2_1(:,2),Ch3_1(:,1)*10^9,Ch3_1(:,2),Ch4_1(:,1)*10^9,Ch4_1(:,2));
-% % xlabel('TOF [ns]','FontSize',20);
-% % ylabel('Amplitude [Volt]','FontSize',20);
-% % set(gca,'fontsize',20)
-% %% Ch1 -> identify the time shift dt (ns) to shift photopeak to zero and put it as input in the next section
-% % figure;
-% % plot(Ch1_1(:,1)*10^9,smooth(Ch1_1(:,2),30))
+
 % %%
 % % dt_1_1=235.7;%ns   <---- time shift of the photopeak
 % % d1_1=0.85; %%%det to Target distance in m
@@ -46,7 +85,9 @@ clear opts
 % % tl_1_1=(d1_1/(3*10^8))*10^9 %light travel time
 % % Ch1_1(:,2)=Ch1_1(:,2)*Att1_1;
 % % time_Ch1_1=Ch1_1(:,1)*10^9-dt_1_1+tl_1_1 %ns TOF corrected for the time of light
-% % 
+
+
+
 % % % energy plot -> 
 % % %select with brush tool a tof spectrum region (do not select the photopeak)
 % % %to convert the tof in energy, save the variable as "proton_1_1"
@@ -55,6 +96,7 @@ clear opts
 % % xlabel('TOF [ns]','FontSize',20);
 % % ylabel('Amplitude [Volt]','FontSize',20);
 % % set(gca,'fontsize',20)
+
 % %% This convert the TOF values in proton kinetic energy 
 % % mP=((938.27)/(9*10^16));
 % % c=3*10^8;
