@@ -11,25 +11,27 @@ addpath("FunctionsTOF/");
 % c2: IC
 %
 [dataAutomatic, opts_dataAutomatic] = ...
-    readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-09/Automatic/Data-ScopeLC_8404M--2022-05-09--15-45-39.165_D2_5139.00.txt');
+    readLECROYWaveRunnerkR('/home/pablo.cirrone/PersonalDataAnalisys/WaterTarget/OSC/2022-05-12/LC8404M--2022-05-12--15-34-58.706--0083.txt');
 
 
 %% Plot
 createfigure(dataAutomatic.Time, dataAutomatic.Ampl3)
-legend('IC')
+legend('SiC')
 
 
-%createfigure(dataManual_Diamond_00.Time, dataManual_Diamond_00.Ampl)
+%createfigure(dataManual_Diamond_00.Time, dataManual_Diamond_00.Ampl3)
 %legend('Diamond')
 %% Energy calculation from the time position
 %
+[TimeInput_zero, AmplitudeInput_zero] = ginput;
 [TimeInput, AmplitudeInput] = ginput;
 
+Time = TimeInput_zero - TimeInput;
 
 mp = 1*((938.27)/(9*10^16));
 c = 3*10^8;
 
-beta_p = (0.2/(TimeInput))/c;
+beta_p = (0.2/(Time))/c;
 gamma_p = 1/(sqrt(1-beta_p.^2));
 
 % RELATIVISTIC energy in MeV
