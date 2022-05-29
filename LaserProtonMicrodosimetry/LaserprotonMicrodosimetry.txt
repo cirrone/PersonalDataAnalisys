@@ -58,7 +58,7 @@ s:Ge/SiCDetector/Parent   = "World"
 s:Ge/SiCDetector/Material = "SiliconCarbide"
 d:Ge/SiCDetector/HLX      = 245 mm
 d:Ge/SiCDetector/HLY      = 245 mm
-d:Ge/SiCDetector/HLZ      = 5.0 um
+d:Ge/SiCDetector/HLZ      = 0.1 um
 d:Ge/SiCDetector/TransX   = 0. cm
 d:Ge/SiCDetector/TransY   = 0. cm
 d:Ge/SiCDetector/TransZ   = 5.3 um 
@@ -86,8 +86,6 @@ d:Sc/EnergyDepositedSpectra/HistogramMax                = 300 keV
 s:Sc/EnergyDepositedSpectra/OutputType                  = "Xml"
 #sv:Sc/EnergyDepositedSpectra/OnlyIncludeParticlesCharged = 1 "Positive"
 s:Sc/XmlFileName		   		      	= "EnergyDepositedSpectra"
-
-
 
 # Z binning causes creation of a parallel world for scoring
 # e questo permette di fare il picco di Bragg
@@ -126,10 +124,9 @@ s:Sc/Scorer_Pablo/OutputType          		= "ASCII"
 b:Sc/Scorer_Pablo/OutputToConsole            	= "FALSE"       
 s:Sc/Scorer_Pablo/IfOutputFileAlreadyExists 	= "Overwrite" 
 
-
 s:Sc/InfoFirstStage/Quantity                    = "PhaseSpace"
 b:Sc/InfoFirstStage/OutputToConsole             = "True"
-s:Sc/InfoFirstStage/Surface                     = "SiCDetector/ZMinusSurface"
+s:Sc/InfoFirstStage/Surface                     = "SiCDetector/ZPlusSurface"
 s:Sc/InfoFirstStage/OutputType         	 	= "ASCII" 
 s:Sc/InfoFirstStage/OutputFile                  = "ASCIIOutput"
 s:Sc/InfoFirstStage/OnlyIncludeParticlesGoing  	= "In"
@@ -139,7 +136,6 @@ b:Sc/InfoFirstStage/IncludeTrackID              = "True"
 b:Sc/InfoFirstStage/IncludeParentID             = "True"
 b:Sc/InfoFirstStage/IncludeCreatorProcess       = "True"
 b:Sc/InfoFirstStage/IncludeVertexInfo           = "True"
-
 
 
 # Scores in the Delta_E detector: calcola l'energia totale depositata in tutto il run
@@ -165,7 +161,7 @@ b:Sc/InfoFirstStage/IncludeVertexInfo           = "True"
 #b:Ts/UseQt = "True"
 # =====================   VISUALISATION  =======================================
 #
-s:Gr/ViewA/Type                             = "OpenGL"
+#s:Gr/ViewA/Type                             = "OpenGL"
 i:Gr/ViewA/WindowSizeX                      = 900
 i:Gr/ViewA/WindowSizeY                      = 900
 #d:Gr/ViewA/Theta                            = 55 deg
@@ -184,33 +180,59 @@ sv:Ph/Default/Modules = 6 "g4em-standard_opt4" "g4h-phy_QGSP_BIC_HP" "g4decay" "
 
 
 # =====================   BEAM  =======================================
+#
+includeFile=./ProtonPALS_2017.txt
+
+d:Ge/BeamPosition/TransZ = 5. cm
+
+
+
 
 #proton source
 #
-s:So/proton_9.4/Type="Beam"
-s:So/proton_9.4/Component="BeamPosition"
-d:Ge/BeamPosition/TransZ = -10. cm
-d:Ge/BeamPosition/RotX = 0. deg
-s:So/proton_9.4/BeamParticle="proton"
-d:So/proton_9.4/BeamEnergy = 9.4 MeV
-u:So/proton_9.4/BeamEnergySpread = 0.01
-s:So/proton_9.4/BeamPositionDistribution="Gaussian"
-s:So/proton_9.4/BeamPositionCutoffShape ="Ellipse"
-d:So/proton_9.4/BeamPositionCutoffX =0.1 mm
-d:So/proton_9.4/BeamPositionCutoffY =0.1 mm
-d:So/proton_9.4/BeamPositionSpreadX=0.03 mm
-d:So/proton_9.4/BeamPositionSpreadY=0.03 mm
+#s:So/proton_9.4/Type="Beam"
+#s:So/proton_9.4/Component="BeamPosition"
+#d:Ge/BeamPosition/TransZ = -10. cm
+#d:Ge/BeamPosition/RotX = 0. deg
+#s:So/proton_9.4/BeamParticle="proton"
+#d:So/proton_9.4/BeamEnergy = 9.4 MeV
+#u:So/proton_9.4/BeamEnergySpread = 0.1
+#s:So/proton_9.4/BeamPositionDistribution="Gaussian"
+#s:So/proton_9.4/BeamPositionCutoffShape ="Ellipse"
+#d:So/proton_9.4/BeamPositionCutoffX =0.1 mm
+#d:So/proton_9.4/BeamPositionCutoffY =0.1 mm
+#d:So/proton_9.4/BeamPositionSpreadX=0.03 mm
+#d:So/proton_9.4/BeamPositionSpreadY=0.03 mm
 
-s:So/proton_9.4/BeamAngularDistribution="None"
-d:So/proton_9.4/BeamAngularCutoffX= 0.1 deg
-d:So/proton_9.4/BeamAngularCutoffY= 0.1 deg
+#s:So/proton_9.4/BeamAngularDistribution="None"
+#d:So/proton_9.4/BeamAngularCutoffX= 0.1 deg
+#d:So/proton_9.4/BeamAngularCutoffY= 0.1 deg
 
-d:So/proton_9.4/BeamAngularSpreadX= 0.01 rad
-d:So/proton_9.4/BeamAngularSpreadY= 0.01 rad
-d:Ge/BeamPosition/TransX = 0. cm
-d:Ge/BeamPosition/TransY = 0. cm
+#d:So/proton_9.4/BeamAngularSpreadX= 0.01 rad
+#d:So/proton_9.4/BeamAngularSpreadY= 0.01 rad
+#d:Ge/BeamPosition/TransX = 0. cm
+#d:Ge/BeamPosition/TransY = 0. cm
 
+#s:So/proton_10/Type="Beam"
+#s:So/proton_10/Component="BeamPosition"
+#d:Ge/BeamPosition/TransZ = -10. cm
+#d:Ge/BeamPosition/RotX = 0. deg
+#s:So/proton_10/BeamParticle="proton"
+#d:So/proton_10/BeamEnergy = 10.0 MeV
+#u:So/proton_10/BeamEnergySpread = 0.1
+#s:So/proton_10/BeamPositionDistribution="Gaussian"
+#s:So/proton_10/BeamPositionCutoffShape ="Ellipse"
+#d:So/proton_10/BeamPositionCutoffX =0.1 mm
+#d:So/proton_10/BeamPositionCutoffY =0.1 mm
+#d:So/proton_10/BeamPositionSpreadX=0.03 mm
+#d:So/proton_10/BeamPositionSpreadY=0.03 mm
 
+#s:So/proton_10/BeamAngularDistribution="None"
+#d:So/proton_10/BeamAngularCutoffX= 0.1 deg
+#d:So/proton_10/BeamAngularCutoffY= 0.1 deg
+
+#d:So/proton_10/BeamAngularSpreadX= 0.01 rad
+#d:So/proton_10/BeamAngularSpreadY= 0.01 rad
 
 
 # =====================   OTHER SETTING  =======================================
@@ -230,7 +252,8 @@ b:Ge/QuitIfOverlapDetected = "True"
 
 # =====================   NUMBER OF EVENTS  =======================================
 #
-i:So/proton_9.4/NumberOfHistoriesInRun   = 100
+i:So/proton/NumberOfHistoriesInRun   = 1000000
+#i:So/proton_10/NumberOfHistoriesInRun     = 10000
 
 i:Ts/NumberOfThreads = 12
 #i:Ts/ShowHistoryCountAtInterval = 100
